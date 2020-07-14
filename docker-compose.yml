@@ -21,6 +21,7 @@ services:
 
   db:
     image: mysql:5.7
+    container_name: mysql
     environment:
       MYSQL_DATABASE: hoge
       MYSQL_USER: fuga
