@@ -33,7 +33,4 @@ COPY php.ini /usr/local/etc/php/php.ini
 COPY xdebug.ini /usr/local/etc/php/conf.d/xdebug.ini
 COPY www.conf /usr/local/etc/php-fpm.d/zzz-www.conf
 
-# ユーザー切り替え
-USER  docker
-
 WORKDIR /home/docker

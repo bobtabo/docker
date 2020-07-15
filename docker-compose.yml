@@ -1,5 +1,8 @@
 version: '3'
 
+volumes:
+    phpsocket:
+
 services:
   php:
     container_name: php
@@ -7,8 +10,8 @@ services:
     ports:
       - '9000:9000'
     volumes:
-      - /var/run/php-fpm
       - ~/MountPoint/docker:/home/docker
+      - phpsocket:/var/run/php-fpm
     depends_on:
       - db
 
@@ -17,6 +20,9 @@ services:
     build: ./nginx
     ports:
       - '8080:80'
+    volumes:
+      - ~/MountPoint/docker:/home/docker
+      - phpsocket:/var/run/php-fpm
     depends_on:
       - php
 
