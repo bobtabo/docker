@@ -17,14 +17,21 @@ RUN docker-php-ext-install \
 RUN pecl install xdebug
 RUN docker-php-ext-enable xdebug
 
-# php.iniの置換
-COPY php.ini /etc/php.ini
-
 # Composerのインストール
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
 # ユーザーを作成
-RUN useradd -m -s /bin/bash -u 1000 docker
+ARG USER_UID=1000
+RUN useradd -m -s /bin/bash -u ${USER_UID} docker
+
+# ソケットを置く場所
+RUN mkdir -p /var/run/php-fpm \
+  && chown docker:docker /var/run/php-fpm
+
+# php設定の置換
+COPY php.ini /usr/local/etc/php/php.ini
+COPY xdebug.ini /usr/local/etc/php/conf.d/xdebug.ini
+COPY www.conf /usr/local/etc/php-fpm.d/zzz-www.conf
 
 # ユーザー切り替え
 USER  docker
