@@ -31,3 +31,9 @@ services:
       - "3306:3306"
     volumes:
       - ./docker/db/mysql/data:/var/lib/mysql
+
+  app:
+    build: .
+    volumes:
+      - ~/MountPoint/docker:/home/docker
+    tty: true
