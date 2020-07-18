@@ -46,7 +46,7 @@ WORKDIR /home/docker
 USER docker
 
 # Laravelホーム
-# RUN mkdir -p /home/docker/laravel \
-#       && chown docker:docker /home/docker/laravel
-RUN mkdir -p /home/docker/laravel
+RUN mkdir -p /home/docker/laravel \
+      && chown docker:docker /home/docker/laravel
+# RUN mkdir -p /home/docker/laravel
 
