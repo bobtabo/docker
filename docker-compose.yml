@@ -12,8 +12,6 @@ services:
     volumes:
       - ~/MountPoint/docker/home:/home/docker
       - phpsocket:/var/run
-    # user: docker
-    # working_dir: /home/docker/laravel
     depends_on:
       - php
 
@@ -23,11 +21,8 @@ services:
     ports:
       - '9000:9000'
     volumes:
-      # - /var/run/php-fpm
       - ~/Work/MountPoint/docker/home:/home/docker
       - phpsocket:/var/run
-#    user: docker
-    # working_dir: /home/docker/laravel
     depends_on:
       - db
 

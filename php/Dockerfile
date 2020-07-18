@@ -39,8 +39,6 @@ COPY php.ini /usr/local/etc/php/php.ini
 COPY xdebug.ini /usr/local/etc/php/conf.d/xdebug.ini
 COPY www.conf /usr/local/etc/php-fpm.d/zzz-www.conf
 
-# VOLUME ["/var/run/php-fpm"]
-
 WORKDIR /home/docker
 
 USER docker
@@ -48,5 +46,3 @@ USER docker
 # Laravelホーム
 RUN mkdir -p /home/docker/laravel \
       && chown docker:docker /home/docker/laravel
-# RUN mkdir -p /home/docker/laravel
-
