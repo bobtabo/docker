@@ -1,15 +1,22 @@
 FROM nginx:latest
 
 # ユーザーを作成
-ARG USER_UID=1000
-RUN useradd -m -s /bin/bash -u ${USER_UID} docker
+ARG DOCKER_UID=1000
+ARG DOCKER_USER=docker
+ARG DOCKER_PASSWORD=docker
+    RUN useradd -m --uid ${DOCKER_UID} --groups sudo ${DOCKER_USER} \
+    && echo ${DOCKER_USER}:${DOCKER_PASSWORD} | chpasswd \
+    && echo "docker    ALL=(ALL)       ALL" >> /etc/sudoers
 
 # php設定の置換
 COPY conf.d/default.conf /etc/nginx/conf.d/default.conf
 COPY nginx.conf /etc/nginx/nginx.conf
 
-RUN chgrp -R root /var/cache/nginx /var/run /var/log/nginx && \
+RUN chgrp -R docker /var/cache/nginx /var/run /var/log/nginx && \
     chmod -R 770 /var/cache/nginx /var/run /var/log/nginx
 
-
 CMD ["nginx", "-g", "daemon off;"]
+
+# USER docker
+
+# WORKDIR /home/docker

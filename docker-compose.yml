@@ -10,8 +10,11 @@ services:
     ports:
       - '9000:9000'
     volumes:
-      - ~/MountPoint/docker:/home/docker
+      # - /var/run/php-fpm
+      - ~/Work/MountPoint/docker/home:/home/docker
       - phpsocket:/var/run/php-fpm
+#    user: docker
+#    working_dir: /home/docker/laravel
     depends_on:
       - db
 
@@ -19,9 +22,9 @@ services:
     container_name: nginx
     build: ./nginx
     ports:
-      - '8080:80'
+      - '80:80'
     volumes:
-      - ~/MountPoint/docker:/home/docker
+      - ~/MountPoint/docker/home:/home/docker
       - phpsocket:/var/run/php-fpm
     depends_on:
       - php
@@ -37,4 +40,4 @@ services:
     ports:
       - "3306:3306"
     volumes:
-      - ./docker/db/mysql/data:/var/lib/mysql
+      - ~/Work/MountPoint/docker/db/data:/var/lib/mysql
