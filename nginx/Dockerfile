@@ -8,7 +8,7 @@ ARG DOCKER_PASSWORD=docker
     && echo ${DOCKER_USER}:${DOCKER_PASSWORD} | chpasswd \
     && echo "docker    ALL=(ALL)       ALL" >> /etc/sudoers
 
-# php設定の置換
+# 設定の置換
 COPY conf.d/default.conf /etc/nginx/conf.d/default.conf
 COPY nginx.conf /etc/nginx/nginx.conf
 
